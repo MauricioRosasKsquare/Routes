@@ -1,39 +1,51 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
 import Navbar from './componets/Navbar';
+import { Routes, Route } from 'react-router-dom'
+import LogIn from './pages/LogIn';
+import LandingPage from './pages/LandingPage';
+import NotFound from './pages/NotFound';
+import PostsGrid from './componets/PostsGrid';
+import PostCard from "./componets/PostCard"
 
 
 function App() {
 
   const [posts ,setPosts] = useState([])
   const [isLoading ,setIsLoading] = useState(true)
-  const [error ,setError] = useState(null)
+
   
   useEffect(() => {
 
-    fetch('https://jsonplaceholder.typicode.com/todos')
+    fetch('https://jsonplaceholder.typicode.com/posts')
       .then(res => {
         if( !res.ok ){
           throw Error('Could not fetch the data')
         }
-        res.json()
+        return res.json()
       })
       .then(data => {
         setPosts(data)
         setIsLoading(false)
-        setError(null)
       })
       .catch( err => {
         setIsLoading(false)
-        setError(err.message)
-      })  
+      })
   }, [])
 
 
   return (
     <div className="App">
-      <Navbar />
+      <Routes>
+       
+        <Route exact path = "/" element = { <LandingPage /> }/>
+        <Route exact path = "/login" element = { <LogIn /> }/>
+        <Route exact path="/posts" element= {<> <Navbar /> {!isLoading ? <PostsGrid posts={posts}  />  : "loading"} </>} />
+        <Route exact path="/posts/:id" element={<> <Navbar /> {!isLoading ? <PostCard  post={posts} paginated={false} /> : "loading"} </>} />
+        <Route path="*" element= { <NotFound /> }/>
+        
+      </Routes>
     </div>
   );
 }
