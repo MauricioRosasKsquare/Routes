@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Navbar from "../componets/Navbar";
-import '../NotFound.module.css'
 
 function LandingPage() {
 
