@@ -9,7 +9,7 @@ const Navbar = () => {
           <Link to="/posts">Posts</Link>
           <Link to="/login" onClick={() => localStorage.setItem('authorized', "0")} style={{ 
                               color: 'white', 
-                              backgroundColor: '#f1356d',
+                              backgroundColor: '#3548f1',
                               borderRadius: '8px' 
                             }}>Log Out</Link>
         </div>
