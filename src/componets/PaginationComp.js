@@ -12,7 +12,7 @@ const PaginationComp = ({ postsPerPage, totalPosts, paginate }) => {
       <Pagination style={{justifyContent:"center", paddingTop:"20px"}}>
         {pageNumbers.map(page => (
             <Pagination.Item key={page}>
-                <a onClick={() => paginate(page)}  className='page-link'>
+                <a onClick={() => paginate(page)} href="#!" className='page-link'>
                 {page}
                 </a>
             </Pagination.Item>

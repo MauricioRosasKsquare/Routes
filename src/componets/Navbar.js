@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className="links">
           <Link to="/">Home</Link>
           <Link to="/posts">Posts</Link>
-          <Link to="/login" style={{ 
+          <Link to="/login" onClick={() => localStorage.setItem('authorized', "0")} style={{ 
                               color: 'white', 
                               backgroundColor: '#f1356d',
                               borderRadius: '8px' 

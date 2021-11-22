@@ -1,6 +1,7 @@
 import PostCard from "./PostCard"
 import PaginationComp from "./PaginationComp"
 import { useState } from 'react'
+import { Navigate } from "react-router";
 
 
 
@@ -17,7 +18,8 @@ const PostsGrid = ( {posts} ) => {
 
     return (
         <>
-
+        { (localStorage.getItem('authorized') === "1") ? (
+        <>
         <div style={{paddingTop:"10px" ,display:"grid", gridTemplateColumns: "repeat(auto-fill, 250px)", justifyContent:"center", gap:"20px"}}>
             {currentPosts.map((post, i) => 
                 <PostCard key={i} post={post} paginated={true}/>
@@ -25,6 +27,8 @@ const PostsGrid = ( {posts} ) => {
             
         </div>
         <PaginationComp postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
+        </>)
+        : <Navigate to= "/" /> }
         </>
     )
 }
